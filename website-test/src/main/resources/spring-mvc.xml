@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                     http://www.springframework.org/schema/beans/spring-beans.xsd
+					 http://www.springframework.org/schema/context 
+                     http://www.springframework.org/schema/context/spring-context.xsd
+                     http://www.springframework.org/schema/mvc
+                     http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                     http://www.springframework.org/schema/tx
+                     http://www.springframework.org/schema/tx/spring-tx.xsd
+                     http://www.springframework.org/schema/util
+                     http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+       default-autowire="byName">
+
+
+
+    <mvc:annotation-driven/>
+
+    <mvc:default-servlet-handler/>
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+
+    <!--<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>-->
+
+    <!-- WEB服务扫描 -->
+    <context:component-scan base-package="com.jd.cd.domain.web"/>
+
+    <bean id="propertyPlaceholder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:config.properties</value>
+            </list>
+        </property>
+    </bean>
+
+
+
+
+    <!--<bean class="org.springframework.aop.framework.ProxyFactoryBean">-->
+        <!--<property name="proxyTargetClass" value="true"/>-->
+        <!--<property name="targetClass" value="com.jd.cd.domain.web.TestController"/>-->
+        <!--<property name="interceptorNames">-->
+            <!--<list>-->
+                <!--<value>myMethodIntercepter</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <bean id="testService" class="com.jd.cd.domain.service.TestService"/>
+
+    <bean id="myMethodIntercepter" class="com.jd.cd.domain.intercepter.MyMethodIntercepter"/>
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="proxyTargetClass" value="true"/>
+        <property name="beanNames">
+            <list>
+                <!--<value>testService</value>-->
+                <value>*Controller</value>
+            </list>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>myMethodIntercepter</value>
+            </list>
+        </property>
+    </bean>
+
+
+
+
+    <!--避免通过url后缀去判断MimeType类型-->
+    <!--<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManager"/>-->
+    <!--<mvc:annotation-driven>-->
+        <!--<mvc:message-converters>-->
+            <!--<bean class="com.jd.cd.domainn.web.StringHttpMessageConverter"/>-->
+            <!--&lt;!&ndash;<bean class="org.springframework.http.converter.StringHttpMessageConverter">&ndash;&gt;-->
+                <!--&lt;!&ndash;<constructor-arg index="0" value="UTF-8"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;</bean>&ndash;&gt;-->
+        <!--</mvc:message-converters>-->
+    <!--</mvc:annotation-driven>-->
+
+    <!--<bean-->
+            <!--class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
+        <!--<property name="messageConverters">-->
+            <!--<util:list id="beanList">-->
+                <!--<ref bean="mappingJacksonHttpMessageConverter" />-->
+            <!--</util:list>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!--<bean id="mappingJacksonHttpMessageConverter"-->
+          <!--class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">-->
+        <!--<property name="supportedMediaTypes">-->
+            <!--<list>-->
+                <!--<value>text/html;charset=UTF-8</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
+        <!--<property name = "messageConverters">-->
+            <!--<list>-->
+                <!--<bean class = "org.springframework.http.converter.StringHttpMessageConverter">-->
+                    <!--<property name = "supportedMediaTypes">-->
+                        <!--<list>-->
+                            <!--<value>text/plain;charset=UTF-8</value>-->
+                        <!--</list>-->
+                    <!--</property>-->
+                <!--</bean>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
+         <!--<property name="messageConverters">-->
+             <!--<list>-->
+                <!--<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/></list>-->
+         <!--</property>-->
+     <!--</bean>-->
+
+
+
+    <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="/WEB-INF/vm/"/>
+        <property name="velocityProperties">
+            <props>
+                <prop key="input.encoding">UTF-8</prop>
+                <prop key="output.encoding">UTF-8</prop>
+                <prop key="contentType">text/html;charset=UTF-8</prop>
+                <prop key="layoutKey">layout</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+        <property name="layoutUrl" value="layout/default.vm"/>
+        <property name="cache" value="false"/>
+        <property name="suffix" value=".vm"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="dateToolAttribute" value="dateTool"/>
+        <property name="numberToolAttribute" value="numTool"/>
+    </bean>
+
+    <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+        <property name="resourceLoaderPath" value="/WEB-INF/vm/" />
+        <property name="velocityProperties">
+            <props>
+                <prop key="input.encoding">utf-8</prop>
+                <prop key="output.encoding">utf-8</prop>
+                <prop key="contentType">text/html;charset=UTF-8</prop><!-- contentType -->
+                <!--<prop key="layoutKey">layout</prop>-->
+                <!--<prop key="tools.view.servlet.layout.directory">layout</prop>-->
+                <!--<prop key="tools.view.servlet.layout.default.template">default.vm</prop>-->
+                <!--<prop key="velocimacro.library">/WEB-INF/vm/common/macro.vm</prop>-->
+            </props>
+        </property>
+    </bean>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.jd.cd.domain.intercepter.TestIntercepter">
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>

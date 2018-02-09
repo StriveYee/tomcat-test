@@ -1,0 +1,16 @@
+-Dcatalina.home=D:\tomcat7
+-Dcatalina.base=D:\tomcat7
+-Djava.endorsed.dirs=D:\tomcat7\endorsed
+-Djava.io.tmpdir=D:\tomcat7\temp
+-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+-Djava.util.logging.config.file=D:\tomcat7\conf\logging.properties
+
+将d:\tomcat7换成你的路径
+
+
+-Dcatalina.home=D:\Source\opencode\tomcat-test\apache-tomcat-7.0.84-src
+-Dcatalina.base=D:\Source\opencode\tomcat-test\apache-tomcat-7.0.84-src
+-Djava.endorsed.dirs=D:\Source\opencode\tomcat-test\apache-tomcat-7.0.84-src\endorsed
+-Djava.io.tmpdir=D:\Source\opencode\tomcat-test\apache-tomcat-7.0.84-src\temp
+-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+-Djava.util.logging.config.file=D:\Source\opencode\tomcat-test\apache-tomcat-7.0.84-src\conf\logging.properties
