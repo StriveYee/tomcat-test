@@ -8,9 +8,9 @@
 将d:\tomcat7换成你的路径
 
 
--Dcatalina.home=D:\Source\opencode\tomcat-test\apache-tomcat-7.0.84-src
--Dcatalina.base=D:\Source\opencode\tomcat-test\apache-tomcat-7.0.84-src
--Djava.endorsed.dirs=D:\Source\opencode\tomcat-test\apache-tomcat-7.0.84-src\endorsed
--Djava.io.tmpdir=D:\Source\opencode\tomcat-test\apache-tomcat-7.0.84-src\temp
+-Dcatalina.home=D:\Source\myspace\tomcat-test\apache-tomcat-7.0.84-src
+-Dcatalina.base=D:\Source\myspace\tomcat-test\apache-tomcat-7.0.84-src
+-Djava.endorsed.dirs=D:\Source\myspace\tomcat-test\apache-tomcat-7.0.84-src\endorsed
+-Djava.io.tmpdir=D:\Source\myspace\tomcat-test\apache-tomcat-7.0.84-src\temp
 -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
--Djava.util.logging.config.file=D:\Source\opencode\tomcat-test\apache-tomcat-7.0.84-src\conf\logging.properties
+-Djava.util.logging.config.file=D:\Source\myspace\tomcat-test\apache-tomcat-7.0.84-src\conf\logging.properties

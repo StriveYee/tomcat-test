@@ -1,0 +1,21 @@
+#set($layout="/layout/default_new.vm")
+
+#parse("/model/coupon.vm")
+
+#set($cc=111)
+
+<div>
+
+    <p>
+       aaa
+    </p>
+    <p>$dateTool.getYear()</p>
+    <p>${aa}</p>
+    <p>$dateTool.format("yyyy-MM-dd HH:mm:ss", $date)</p>
+    <p>${bb}</p>
+    <p>${cc}</p>
+
+    <h2>测试乱码问题</h2>
+    <a href="http://localhost/test/index2?bb=%E6%B5%8B%E8%AF%95">点击跳转</a>
+
+</div>
